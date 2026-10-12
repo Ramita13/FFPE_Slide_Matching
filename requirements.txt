@@ -1,0 +1,16 @@
+# Core (Python 3.14, CPU)
+numpy
+opencv-python-headless
+scipy
+pandas
+matplotlib
+pillow
+# Matching
+pot          # partial / unbalanced optimal transport, Gromov-Wasserstein
+pycpd        # CPD baseline
+# Segmentation (optional, heavier)
+torch
+torchvision
+timm
+# mobile_sam: pip install git+https://github.com/ChaoningZhang/MobileSAM.git
+# tiatoolbox: needs a separate venv with --no-deps on Python 3.14 (see docs/research/02_segmentation.md)

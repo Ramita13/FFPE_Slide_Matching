@@ -26,3 +26,8 @@ venv/
 Thumbs.db
 .vscode/
 .idea/
+
+# Local environments / model weights
+.venv*/
+models/
+*.pt

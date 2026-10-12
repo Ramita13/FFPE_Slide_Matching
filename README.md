@@ -38,7 +38,14 @@ and an explicit notion of "unmatched", not just a global similarity score.
 
 ## Status
 
-🧪 Early research phase — see [docs/ROADMAP.md](docs/ROADMAP.md).
+🧪 Phase 1 (research survey) complete. Start with **[docs/research/00_synthesis.md](docs/research/00_synthesis.md)**; progress is tracked in [docs/ROADMAP.md](docs/ROADMAP.md).
+
+## Setup
+
+```bash
+pip install -r requirements.txt   # Python 3.14, CPU-only is sufficient
+python scripts/eda.py --data-dir data
+```
 
 ## Citation
 
