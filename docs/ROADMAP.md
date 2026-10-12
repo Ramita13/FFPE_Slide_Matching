@@ -18,13 +18,13 @@ Output: **[research/00_synthesis.md](research/00_synthesis.md)**: conclusions, r
 
 > Working principle: cheapest experiment first, a pass/fail gate written before each run, scale up only after a gate passes.
 
-## Phase 2 — Benchmark infrastructure (next)
+## Phase 2 — Benchmark infrastructure ✅ ([EXP-001](experiments/EXP-001_benchmark.md))
 - Fixed case-level splits
 - **Mask-space** synthetic omission generator + hard non-omission perturbations
-- Small manually labelled real test set
+- ~~Small manually labelled real test set~~ → moved to Phase 6 (no real labels available)
 - Common evaluation harness (AUROC, sens@spec, stratified by missing-area %)
 
-## Phase 3 — Segmentation benchmark
+## Phase 3 — Segmentation benchmark (next)
 Slide (classical vs GrandQC) and block (classical vs SAM-refined) on ~100 cases with ~50 hand-corrected block masks.
 
 ## Phase 4 — Matching baselines

@@ -47,6 +47,9 @@ A block and its slide share the case ID: `Case0001_LK.jpg` ↔ `Case0001_QP.jpg`
 - **There are no labels for missing tissue.** All pairs are presumed to be
   genuine matches; whether any contain real omissions is unknown. See
   [PROBLEM.md](PROBLEM.md) for how we construct evaluation labels.
+- **Only the cropped images exist** (no uncropped WSI previews). An apparent omission can
+  therefore also be a crop artefact. This is why the system has a third output,
+  *cannot assess*, and why real omissions can only be confirmed by manual review.
 
 Detailed statistics are produced by the EDA in
 [research/05_dataset_eda.md](research/05_dataset_eda.md).
