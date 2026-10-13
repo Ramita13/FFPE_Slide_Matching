@@ -45,8 +45,8 @@ def _iou(a, b):
 
 
 def _run_case(args):
-    method, case, specimen, track, n_per_case, cfg = args
-    m = get_masks(case)
+    method, case, specimen, track, n_per_case, cfg, seg = args
+    m = get_masks(case, **seg)
     if not assessable(m):
         return [{"case": case, "specimen": specimen, "assessable": 0}]
     ref = m["slide_mask"] if track == "self" else m["block_mask"]
@@ -59,6 +59,7 @@ def _run_case(args):
                "label": s.label, "missing_frac": round(s.missing_frac, 5),
                "mode": s.meta.get("mode", "none"), "tear": int(s.meta.get("tear", False)),
                "shrink": int(s.meta.get("shrink", False)), "score": float(out["score"])}
+        row.update({k: float(v) for k, v in out.items() if k.startswith("x_")})
         if track == "self" and s.label and out.get("missing_map") is not None:
             row["iou"] = _iou(out["missing_map"].astype(bool), s.removed_ref)
         rows.append(row)
@@ -66,8 +67,10 @@ def _run_case(args):
 
 
 def run(method, split: str = "val", track: str = "self", dev_only: bool = True,
-        n_per_case: int = 2, cfg: SynthConfig = SynthConfig(), workers: int = 8) -> list[dict]:
-    jobs = [(method, c, sp, track, n_per_case, cfg) for c, sp in load_split(split, dev_only)]
+        n_per_case: int = 2, cfg: SynthConfig = SynthConfig(), workers: int = 8,
+        seg: dict | None = None) -> list[dict]:
+    """seg: segmenter choice passed to get_masks, e.g. {"slide": "grandqc"}."""
+    jobs = [(method, c, sp, track, n_per_case, cfg, seg or {}) for c, sp in load_split(split, dev_only)]
     with ProcessPoolExecutor(workers) as ex:
         return [r for rows in ex.map(_run_case, jobs, chunksize=4) for r in rows]
 

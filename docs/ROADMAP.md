@@ -24,10 +24,10 @@ Output: **[research/00_synthesis.md](research/00_synthesis.md)**: conclusions, r
 - ~~Small manually labelled real test set~~ → moved to Phase 6 (no real labels available)
 - Common evaluation harness (AUROC, sens@spec, stratified by missing-area %)
 
-## Phase 3 — Segmentation benchmark (next)
-Slide (classical vs GrandQC) and block (classical vs SAM-refined) on ~100 cases with ~50 hand-corrected block masks.
+## Phase 3 — Segmentation benchmark (in progress, paused)
+Slide (classical vs GrandQC) and block (classical vs SAM-refined), judged by downstream P1 performance on the `cross` track (no hand-labelled masks; decided 2026-10-12).
 
-## Phase 4 — Matching baselines
+## Phase 4 — Matching baselines (P1 started: [EXP-002](experiments/EXP-002_p1_coverage.md))
 P1 rigid-search + coverage → P2 fragment assignment with "missing" option → P3 partial GW; CPD as reference.
 
 ## Phase 5 — Learned matcher (only if Phase 4 misses its gate)

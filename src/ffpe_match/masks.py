@@ -11,8 +11,23 @@ from .segment import segment_block, segment_slide
 CACHE = ROOT / "cache" / "masks"
 
 
-def get_masks(case: str, cache: Path = CACHE) -> dict:
-    """Return block_mask, block_inst, slide_mask, slide_groups for a case (cached)."""
+def get_masks(case: str, slide: str = "classical", block: str = "classical") -> dict:
+    """Return block_mask, block_inst, slide_mask, slide_groups for a case.
+
+    slide/block select the segmenter. 'classical' masks are computed on demand and cached;
+    other variants (e.g. slide='grandqc') are read from cache/masks_<variant>/ and must be
+    produced beforehand by their scripts (scripts/cache_<variant>_masks.py)."""
+    m = _classical(case)
+    if slide != "classical":
+        with np.load(ROOT / "cache" / f"masks_{slide}" / f"{case}.npz") as z:
+            m["slide_mask"], m["slide_groups"] = z["slide_mask"], z["slide_groups"]
+    if block != "classical":
+        with np.load(ROOT / "cache" / f"masks_{block}" / f"{case}.npz") as z:
+            m["block_mask"], m["block_inst"] = z["block_mask"], z["block_inst"]
+    return m
+
+
+def _classical(case: str, cache: Path = CACHE) -> dict:
     f = cache / f"{case}.npz"
     if f.exists():
         with np.load(f) as z:
